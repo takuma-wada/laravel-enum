@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EnumController;
-
+use App\Enums\UserStatus;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,3 +19,11 @@ Route::get('/', function () {
 });
 
 Route::get('/enum', EnumController::class);
+
+Route::get('/users/{status}', function (UserStatus $status) {
+    return $status->showStatus();
+});
+
+Route::get('/users/{status}/nameValue', function (UserStatus $status) {
+    return dd($status->name, $status->value);
+});
