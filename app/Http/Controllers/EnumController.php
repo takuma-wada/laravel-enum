@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\Vehicle;
+use App\Enums\UserStatus;
 use Illuminate\Http\Request;
 
 class EnumController extends Controller
@@ -15,6 +16,7 @@ class EnumController extends Controller
      */
     public function __invoke(Request $request)
     {
+        # ------- laravelのenumライブラリを使用した一例 -------
         // keyを全て取り出す
         $vehicleAllKeys = Vehicle::getKeys();
 
@@ -29,5 +31,16 @@ class EnumController extends Controller
 
         // ランダムにvalueを返す
         $ramdomValue = Vehicle::getRandomValue();
+
+        # ------- phpのenumを使用した例 -------
+        // enum値の一覧を配列で取得
+        $userStatusAllList = UserStatus::cases();
+
+        // スカラー値からEnumのcaseを返す
+        //  存在しない場合エラー
+        $isGuestCase = UserStatus::from('test');
+
+        // 　存在しない場合null
+        $isGuestCase = UserStatus::tryFrom('test');
     }
 }
